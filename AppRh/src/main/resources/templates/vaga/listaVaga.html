@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang=”pt-br” xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>| App RH - UC 12 |</title>
+
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<title>VagasApp</title>
+
+</head>
+
+<body>
+
+
+
+
+	<div th:replace="~{fragments/menu :: menu}">...</div>
+
+	<div class="container">
+
+		<h1>Lista de vagas cadastradas</h1>
+
+		<br>
+
+		<table class="table table-hover table-responsive w-auto table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Nome da vaga:</th>
+					<th scope="col">Descrição:</th>
+					<th scope="col">Salário:</th>
+					<th scope="col">Expira:</th>
+					<th scope="col"></th>
+					<th scope="col">Ações:</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vaga:${vagas}">
+					<td><a th:href="@{/vaga/{id}(id=${vaga.id})}"><span th:text="${vaga.nome}"></span></a></td>
+					<td><span th:text="${vaga.descricao}"></span></td>
+					<td>R$<span th:text="${vaga.salario}"></span></td>
+					<td><span th:text="${vaga.data}"></span></td>
+					<td><button type="button"  data-toggle="modal" th:data-target="'#modalExcluir'+ ${vaga.id}" class="btn btn-danger">Excluir</button></td>
+					<td><a th:href="@{/vaga/editar/{id}(id=${vaga.id})}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+					<td><a th:href="@{/vaga/{id}(id=${vaga.id})}"><button type="button" class="btn btn-success">Adicionar candidato</button></a></td>
+					<div th:id="'modalExcluir'+ ${vaga.id}" class="modal fade" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+						  <div class="modal-content">
+							<div class="modal-header bg-danger">
+							  <h4 class="modal-title text-white">Exclusão da vaga</h4>
+							  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div class="modal-body">
+							  <p>Realmente você deseja excluir a vaga: <strong th:text="${vaga.nome}"> ...</strong> ?</p>
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							  <a th:href="@{/vaga/delete/{id}(id=${vaga.id})}" class="btn text-white btn-danger">Excluir</a>
+							</div>
+						  </div>
+						</div>
+					  </div>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div style="height: 100px;"></div>
+
+		<div class="footer-copyright fixed-bottom bg-dark text-center py-3">
+			<span class="text-light align-middle">| App RH  | - ©
+				2025 Copyright</span>
+		</div>
+		
+
+		<!--JavaScript bootstrap-->
+		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+
+			</script>
+</body>
+
+</html>

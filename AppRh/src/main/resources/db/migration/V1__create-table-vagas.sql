@@ -1,0 +1,7 @@
+CREATE TABLE vagas (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    data VARCHAR(255) NOT NULL,
+    salario VARCHAR(255) NOT NULL
+);
